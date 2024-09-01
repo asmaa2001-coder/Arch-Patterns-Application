@@ -19,7 +19,7 @@ class NumberViewModel : ViewModel() {
         getNumbers()
     }
 
-    fun getAddition() {
+    fun setAddition() {
         val result = num.fnum + num.snum
         mutableLiveDataResult.value = result
     }

@@ -18,35 +18,39 @@ class MainActivity : AppCompatActivity() , NumberView {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter = NumberPresenter( NumberRepoImpl())
+        presenter = NumberPresenter(NumberRepoImpl())
 
         //for MVVM
         numberViewModel.numbers.observe(this) { numbers ->
             binding.num1.text = numbers.fnum.toString()
             binding.num2.text = numbers.snum.toString()
         }
-        binding.plus.setOnClickListener {
-            numberViewModel.result.observe(this) { result ->
-                binding.plusResult.text = result.toString()
 
-            }
-            numberViewModel.getAddition()
+        numberViewModel.result.observe(this) { result ->
+            binding.plusResult.text = result.toString()
+
+        }
+        binding.plus.setOnClickListener {
+
+              numberViewModel.setAddition()
+
+
         }
 
         //for mvp
-        binding.minus.setOnClickListener{displayResult()}
+        binding.minus.setOnClickListener { displayResult() }
 
         //for mvc
-        binding.multi.setOnClickListener{
-            val result =DBNumberData().getNumbers().fnum*DBNumberData().getNumbers().snum
-            binding.multiResult.text=result.toString()
+        binding.multi.setOnClickListener {
+            val result = DBNumberData().getNumbers().fnum * DBNumberData().getNumbers().snum
+            binding.multiResult.text = result.toString()
 
         }
 
     }
 
     override fun displayResult() {
-        binding.minusResult.text=presenter.onButtonClickedSubtraction().toString()
+        binding.minusResult.text = presenter.onButtonClickedSubtraction().toString()
     }
 
 
