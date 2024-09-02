@@ -6,11 +6,11 @@ import com.example.archpatternsapplication.pojo.DBNumberData
 import com.example.archpatternsapplication.pojo.NumberModel
 
 class NumberViewModel : ViewModel() {
-    private val mutableLiveDataNum = MutableLiveData<NumberModel>()
-    val numbers: MutableLiveData<NumberModel> get() = mutableLiveDataNum
+    private val _numbers = MutableLiveData<NumberModel>()
+    val numbers: MutableLiveData<NumberModel> get() = _numbers
 
-    private val mutableLiveDataResult = MutableLiveData<Int>()
-    val result: MutableLiveData<Int> get() = mutableLiveDataResult
+    private val _result = MutableLiveData<Int>()
+    val result: MutableLiveData<Int> get() = _result
 
     val num = DBNumberData().getNumbers()
 
@@ -20,12 +20,11 @@ class NumberViewModel : ViewModel() {
     }
 
     fun setAddition() {
-        val result = num.fnum + num.snum
-        mutableLiveDataResult.value = result
+        _result.value = (num.fnum + num.snum)
     }
 
     private fun getNumbers() {
-        mutableLiveDataNum.value = num
+        _numbers.value = num
 
     }
 
